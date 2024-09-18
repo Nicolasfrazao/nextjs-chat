@@ -18,10 +18,23 @@ export interface UserMenuProps {
   user: Session['user']
 }
 
-function getUserInitials(name: string) {
+/**
+ * Given a full name like "John Doe", this function returns the user's initials
+ * like "JD" or just "J" if the user only has a single name.
+ *
+ * @param name The full name of the user.
+ * @returns The user's initials.
+ */
+function getUserInitials(name: string): string {
+  // Split the full name into an array of strings, e.g. ["John", "Doe"]
   const [firstName, lastName] = name.split(' ')
+
+  // If the user has a last name, return the first letter of the first name
+  // followed by the first letter of the last name. If not, just return the
+  // first letter of the first name.
   return lastName ? `${firstName[0]}${lastName[0]}` : firstName.slice(0, 2)
 }
+
 
 export function UserMenu({ user }: UserMenuProps) {
   return (
@@ -77,3 +90,4 @@ export function UserMenu({ user }: UserMenuProps) {
     </div>
   )
 }
+
